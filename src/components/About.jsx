@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import cih2Bg from "../assets/cih2-bg.jpg";
+import PageTitle from "../components/PageTitle";
 import {
   FaSnowflake,
   FaWifi,
@@ -44,6 +45,8 @@ export default function AboutCihampelasHotel() {
   }, []);
 
   return (
+    <>
+      <PageTitle title="About" />
     <div className="bg-white text-slate-900 font-sans overflow-x-hidden">
       {/* Hero Section - Full Screen */}
       <div className="relative min-h-screen flex flex-col items-center justify-center">
@@ -433,5 +436,6 @@ export default function AboutCihampelasHotel() {
         </div>
       </section>
     </div>
+    </>
   );
 }

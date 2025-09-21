@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import PageTitle from "../components/PageTitle";
 import { Link } from "react-router-dom";
 import roomBg from "../assets/rooms.jpg";
 import { rooms } from "../data/roomsData";
@@ -25,6 +26,8 @@ export default function RoomsPage() {
   const filteredRooms = rooms.filter((room) => room.hotel === filter);
 
   return (
+    <>
+      <PageTitle title="Rooms" />
     <div className="bg-white min-h-screen">
       {/* Header Section */}
       <div className="relative min-h-screen flex items-center justify-center text-center">
@@ -152,5 +155,6 @@ export default function RoomsPage() {
         ))}
       </div>
     </div>
+    </>
   );
 }

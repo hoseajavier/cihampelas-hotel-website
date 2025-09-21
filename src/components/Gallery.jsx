@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import PageTitle from "../components/PageTitle";
 import bgGallery from "../assets/bg-hotel.jpg";
 import lobiCih1 from "../assets/cihampelas1/lobi-cih1.jpg";
 import lobi1Cih1 from "../assets/cihampelas1/lobi1-cih1.jpg";
@@ -243,145 +244,148 @@ export default function Gallery() {
   }, [selectedImage, currentImageIndex]);
 
   return (
-    <div className="min-h-screen bg-gray-50 pt-8">
-      {/* Header */}
-      <div
-        className="relative min-h-screen flex items-center justify-center text-white overflow-hidden bg-cover bg-center"
-        style={{ backgroundImage: `url(${bgGallery})` }}
-      >
-        {/* Overlay */}
-        <div className="absolute inset-0 bg-black/60 backdrop-blur-xs" />
+    <>
+      <PageTitle title="Gallery" />
+      <div className="min-h-screen bg-gray-50 pt-8">
+        {/* Header */}
+        <div
+          className="relative min-h-screen flex items-center justify-center text-white overflow-hidden bg-cover bg-center"
+          style={{ backgroundImage: `url(${bgGallery})` }}
+        >
+          {/* Overlay */}
+          <div className="absolute inset-0 bg-black/60 backdrop-blur-xs" />
 
-        <div className="relative z-10 max-w-7xl mx-auto px-6 py-20 text-center">
-          <Camera className="w-16 h-16 text-yellow-400 mx-auto mb-6" />
-          <h1 className="text-4xl md:text-6xl font-bold mb-6">Gallery</h1>
-          <p className="text-xl md:text-2xl text-gray-200 max-w-3xl mx-auto">
-            Explore the beauty of Cihampelas Hotel through stunning photo
-            collections
-          </p>
-        </div>
-      </div>
-
-      {/* Filters */}
-      <div className="bg-white shadow-lg sticky top-0 z-40">
-        <div className="max-w-7xl mx-auto px-6 py-6 flex flex-col items-center gap-6">
-          {/* Hotel filter */}
-          <div className="flex flex-wrap gap-2 justify-center">
-            {hotels.map((h) => (
-              <button
-                key={h.id}
-                onClick={() => handleHotelChange(h.id)}
-                className={`px-4 py-2 rounded-full text-md font-medium transition cursor-pointer ${
-                  selectedHotel === h.id
-                    ? "bg-yellow-500 text-white shadow"
-                    : "bg-gray-100 text-gray-600 hover:bg-gray-200"
-                }`}
-              >
-                {h.name}
-              </button>
-            ))}
-          </div>
-        </div>
-      </div>
-
-      {/* Gallery */}
-      <div className="max-w-7xl mx-auto px-6 py-12">
-        {isLoading ? (
-          <div className="flex items-center justify-center py-20">
-            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-yellow-500"></div>
-          </div>
-        ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-6">
-            {filteredImages.map((image, index) => (
-              <div
-                key={image.id}
-                className="group cursor-pointer relative overflow-hidden rounded-2xl bg-white shadow-lg hover:shadow-2xl transition"
-                onClick={() => openLightbox(image, index)}
-              >
-                <img
-                  src={image.src}
-                  alt={image.title}
-                  className="w-full h-64 md:h-72 lg:h-80 xl:h-96 object-cover transition-transform duration-500 group-hover:scale-110"
-                />
-                <div
-                  className="
-      absolute inset-0 bg-black/40 
-      opacity-100 flex flex-col justify-end p-4 text-white
-      md:opacity-0 md:group-hover:opacity-100 md:transition
-    "
-                >
-                  <h3 className="font-semibold text-xl">{image.title}</h3>
-                  <p className="text-md text-gray-200">{image.description}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        )}
-      </div>
-
-      {/* Lightbox */}
-      {selectedImage && (
-        <div className="fixed inset-0 bg-black/95 z-50 flex flex-col items-center justify-center p-4">
-          {/* Close button */}
-          <button
-            onClick={closeLightbox}
-            className="absolute top-6 right-6 w-12 h-12 bg-white/10 hover:bg-white/20 rounded-full flex items-center justify-center"
-          >
-            <X className="w-6 h-6 text-white" />
-          </button>
-
-          {/* Prev / Next buttons */}
-          <button
-            onClick={() => navigateLightbox("prev")}
-            className="absolute left-6 top-1/2 -translate-y-1/2 w-12 h-12 bg-white/10 hover:bg-white/20 rounded-full flex items-center justify-center"
-          >
-            <ChevronLeft className="w-6 h-6 text-white" />
-          </button>
-          <button
-            onClick={() => navigateLightbox("next")}
-            className="absolute right-6 top-1/2 -translate-y-1/2 w-12 h-12 bg-white/10 hover:bg-white/20 rounded-full flex items-center justify-center"
-          >
-            <ChevronRight className="w-6 h-6 text-white" />
-          </button>
-
-          {/* Content wrapper */}
-          <div className="w-full max-w-6xl flex flex-col items-center max-h-[90vh]">
-            {/* Main image */}
-            <div className="flex-1 flex items-center justify-center">
-              <img
-                src={selectedImage.src}
-                alt={selectedImage.title}
-                className="max-h-[65vh] max-w-full object-contain rounded-lg shadow-2xl"
-              />
-            </div>
-
-            {/* Counter */}
-            <p className="text-white mt-2">
-              {currentImageIndex + 1} / {filteredImages.length}
+          <div className="relative z-10 max-w-7xl mx-auto px-6 py-20 text-center">
+            <Camera className="w-16 h-16 text-yellow-400 mx-auto mb-6" />
+            <h1 className="text-4xl md:text-6xl font-bold mb-6">Gallery</h1>
+            <p className="text-xl md:text-2xl text-gray-200 max-w-3xl mx-auto">
+              Explore the beauty of Cihampelas Hotel through stunning photo
+              collections
             </p>
+          </div>
+        </div>
 
-            {/* Thumbnails */}
-            <div className="flex gap-2 overflow-x-auto mt-3 pb-2 w-full justify-center">
-              {filteredImages.map((img, idx) => (
-                <img
-                  key={img.id}
-                  src={img.src}
-                  alt={img.title}
-                  onClick={() => {
-                    setSelectedImage(img);
-                    setCurrentImageIndex(idx);
-                  }}
-                  className={`w-20 h-20 object-cover rounded-md cursor-pointer border-2 ${
-                    idx === currentImageIndex
-                      ? "border-yellow-400"
-                      : "border-transparent"
+        {/* Filters */}
+        <div className="bg-white shadow-lg sticky top-0 z-40">
+          <div className="max-w-7xl mx-auto px-6 py-6 flex flex-col items-center gap-6">
+            {/* Hotel filter */}
+            <div className="flex flex-wrap gap-2 justify-center">
+              {hotels.map((h) => (
+                <button
+                  key={h.id}
+                  onClick={() => handleHotelChange(h.id)}
+                  className={`px-4 py-2 rounded-full text-md font-medium transition cursor-pointer ${
+                    selectedHotel === h.id
+                      ? "bg-yellow-500 text-white shadow"
+                      : "bg-gray-100 text-gray-600 hover:bg-gray-200"
                   }`}
-                />
+                >
+                  {h.name}
+                </button>
               ))}
             </div>
           </div>
         </div>
-      )}
-    </div>
+
+        {/* Gallery */}
+        <div className="max-w-7xl mx-auto px-6 py-12">
+          {isLoading ? (
+            <div className="flex items-center justify-center py-20">
+              <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-yellow-500"></div>
+            </div>
+          ) : (
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-6">
+              {filteredImages.map((image, index) => (
+                <div
+                  key={image.id}
+                  className="group cursor-pointer relative overflow-hidden rounded-2xl bg-white shadow-lg hover:shadow-2xl transition"
+                  onClick={() => openLightbox(image, index)}
+                >
+                  <img
+                    src={image.src}
+                    alt={image.title}
+                    className="w-full h-64 md:h-72 lg:h-80 xl:h-96 object-cover transition-transform duration-500 group-hover:scale-110"
+                  />
+                  <div
+                    className="
+      absolute inset-0 bg-black/40 
+      opacity-100 flex flex-col justify-end p-4 text-white
+      md:opacity-0 md:group-hover:opacity-100 md:transition
+    "
+                  >
+                    <h3 className="font-semibold text-xl">{image.title}</h3>
+                    <p className="text-md text-gray-200">{image.description}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+
+        {/* Lightbox */}
+        {selectedImage && (
+          <div className="fixed inset-0 bg-black/95 z-50 flex flex-col items-center justify-center p-4">
+            {/* Close button */}
+            <button
+              onClick={closeLightbox}
+              className="absolute top-6 right-6 w-12 h-12 bg-white/10 hover:bg-white/20 rounded-full flex items-center justify-center"
+            >
+              <X className="w-6 h-6 text-white" />
+            </button>
+
+            {/* Prev / Next buttons */}
+            <button
+              onClick={() => navigateLightbox("prev")}
+              className="absolute left-6 top-1/2 -translate-y-1/2 w-12 h-12 bg-white/10 hover:bg-white/20 rounded-full flex items-center justify-center"
+            >
+              <ChevronLeft className="w-6 h-6 text-white" />
+            </button>
+            <button
+              onClick={() => navigateLightbox("next")}
+              className="absolute right-6 top-1/2 -translate-y-1/2 w-12 h-12 bg-white/10 hover:bg-white/20 rounded-full flex items-center justify-center"
+            >
+              <ChevronRight className="w-6 h-6 text-white" />
+            </button>
+
+            {/* Content wrapper */}
+            <div className="w-full max-w-6xl flex flex-col items-center max-h-[90vh]">
+              {/* Main image */}
+              <div className="flex-1 flex items-center justify-center">
+                <img
+                  src={selectedImage.src}
+                  alt={selectedImage.title}
+                  className="max-h-[65vh] max-w-full object-contain rounded-lg shadow-2xl"
+                />
+              </div>
+
+              {/* Counter */}
+              <p className="text-white mt-2">
+                {currentImageIndex + 1} / {filteredImages.length}
+              </p>
+
+              {/* Thumbnails */}
+              <div className="flex gap-2 overflow-x-auto mt-3 pb-2 w-full justify-center">
+                {filteredImages.map((img, idx) => (
+                  <img
+                    key={img.id}
+                    src={img.src}
+                    alt={img.title}
+                    onClick={() => {
+                      setSelectedImage(img);
+                      setCurrentImageIndex(idx);
+                    }}
+                    className={`w-20 h-20 object-cover rounded-md cursor-pointer border-2 ${
+                      idx === currentImageIndex
+                        ? "border-yellow-400"
+                        : "border-transparent"
+                    }`}
+                  />
+                ))}
+              </div>
+            </div>
+          </div>
+        )}
+      </div>
+    </>
   );
 }
