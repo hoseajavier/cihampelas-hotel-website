@@ -89,9 +89,14 @@ export default function Home() {
   const [currentRoom, setCurrentRoom] = useState(0);
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
   const [showPopup, setShowPopup] = useState(false);
+  const [hotel, setHotel] = useState("cihampelas1");
+  const [checkIn, setCheckIn] = useState("");
+  const [checkOut, setCheckOut] = useState("");
 
-  const openWhatsApp = (number) => {
-    const url = `https://wa.me/${number}`;
+  const openWhatsApp = (number, hotelName) => {
+    const message = `Halo, saya ingin cek room di ${hotelName} pada tanggal ${checkIn} sampai ${checkOut}, apakah ada room yang tersedia?`;
+    const encodedMessage = encodeURIComponent(message);
+    const url = `https://wa.me/${number}?text=${encodedMessage}`;
     window.open(url, "_blank");
   };
 
@@ -146,7 +151,11 @@ export default function Home() {
                 <label className="text-sm font-medium text-gray-600 mb-2">
                   Hotel
                 </label>
-                <select className="border-b-2 border-gray-300 focus:border-yellow-500 outline-none py-2">
+                <select
+                  value={hotel}
+                  onChange={(e) => setHotel(e.target.value)}
+                  className="border-b-2 border-gray-300 focus:border-yellow-500 outline-none py-2"
+                >
                   <option value="cihampelas1">Cihampelas 1</option>
                   <option value="cihampelas2">Cihampelas 2</option>
                 </select>
@@ -159,6 +168,8 @@ export default function Home() {
                 </label>
                 <input
                   type="date"
+                  value={checkIn}
+                  onChange={(e) => setCheckIn(e.target.value)}
                   className="border-b-2 border-gray-300 focus:border-yellow-500 outline-none py-2"
                 />
               </div>
@@ -170,6 +181,8 @@ export default function Home() {
                 </label>
                 <input
                   type="date"
+                  value={checkOut}
+                  onChange={(e) => setCheckOut(e.target.value)}
                   className="border-b-2 border-gray-300 focus:border-yellow-500 outline-none py-2"
                 />
               </div>
@@ -230,7 +243,9 @@ export default function Home() {
                       <div className="p-4 space-y-3">
                         <button
                           type="button"
-                          onClick={() => openWhatsApp("62817207606")}
+                          onClick={() =>
+                            openWhatsApp("62817207606", "Cihampelas 1")
+                          }
                           className="flex items-center justify-between w-full px-4 py-3 bg-gray-50 hover:bg-gray-100 rounded-lg shadow-sm"
                         >
                           <div className="flex items-center space-x-3">
@@ -247,7 +262,9 @@ export default function Home() {
 
                         <button
                           type="button"
-                          onClick={() => openWhatsApp("62818207606")}
+                          onClick={() =>
+                            openWhatsApp("62818207606", "Cihampelas 2")
+                          }
                           className="flex items-center justify-between w-full px-4 py-3 bg-gray-50 hover:bg-gray-100 rounded-lg shadow-sm"
                         >
                           <div className="flex items-center space-x-3">
